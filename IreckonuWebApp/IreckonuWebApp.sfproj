@@ -33,6 +33,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\IreckonuWebApp.Api\IreckonuWebApp.Api.csproj" />
+    <ProjectReference Include="..\IreckonuWebApp.Client\IreckonuWebApp.Client.csproj" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" />
   <PropertyGroup>

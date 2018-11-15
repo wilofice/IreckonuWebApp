@@ -5,7 +5,9 @@ VisualStudioVersion = 15.0.27130.2024
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{A07B5EB6-E848-4116-A8D0-A826331D98C6}") = "IreckonuWebApp", "IreckonuWebApp\IreckonuWebApp.sfproj", "{7168885C-02E5-401C-B1BB-7A46BEF23591}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IreckonuWebApp.Api", "IreckonuWebApp.Api\IreckonuWebApp.Api.csproj", "{9B470796-F386-411F-BB53-2882C272AE84}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IreckonuWebApp.Api", "IreckonuWebApp.Api\IreckonuWebApp.Api.csproj", "{9B470796-F386-411F-BB53-2882C272AE84}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IreckonuWebApp.Client", "IreckonuWebApp.Client\IreckonuWebApp.Client.csproj", "{9704E7FA-0F5A-452A-BEFA-2A72307CEE47}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,6 +33,14 @@ Global
 		{9B470796-F386-411F-BB53-2882C272AE84}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9B470796-F386-411F-BB53-2882C272AE84}.Release|x64.ActiveCfg = Release|Any CPU
 		{9B470796-F386-411F-BB53-2882C272AE84}.Release|x64.Build.0 = Release|Any CPU
+		{9704E7FA-0F5A-452A-BEFA-2A72307CEE47}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9704E7FA-0F5A-452A-BEFA-2A72307CEE47}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9704E7FA-0F5A-452A-BEFA-2A72307CEE47}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{9704E7FA-0F5A-452A-BEFA-2A72307CEE47}.Debug|x64.Build.0 = Debug|Any CPU
+		{9704E7FA-0F5A-452A-BEFA-2A72307CEE47}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9704E7FA-0F5A-452A-BEFA-2A72307CEE47}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9704E7FA-0F5A-452A-BEFA-2A72307CEE47}.Release|x64.ActiveCfg = Release|Any CPU
+		{9704E7FA-0F5A-452A-BEFA-2A72307CEE47}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
