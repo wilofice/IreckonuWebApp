@@ -14,12 +14,13 @@ namespace IreckonuWebApp.Api.Helpers
         {
             var orders = new List<Order>();
             var filesContent = JsonConvert.DeserializeObject<List<string>>(json["filesContent"].ToString());
+            var stringSeparators = new string[] { "\r\n" };
             foreach(var fileContent in filesContent)
             {
-                var lines = fileContent.Split(new[] { Environment.NewLine },StringSplitOptions.None).Skip(1);
-                foreach(var line in lines)
+                var lines = fileContent.Split(stringSeparators, StringSplitOptions.None);
+                for (var i = 1; i < lines.Length-1; i++)
                 {
-                    orders.Add(CreateOrder(line));
+                    orders.Add(CreateOrder(lines[i]));
                 }
 
             }
