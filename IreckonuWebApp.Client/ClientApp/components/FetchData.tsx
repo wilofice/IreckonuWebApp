@@ -32,7 +32,7 @@ export class FetchData extends React.Component<RouteComponentProps<{}>, FetchOrd
         return <div>
             <h1>Orders</h1>
             <div>
-                <input type="file" value= "Import CSV files" className="form-control btn" accept=".csv" multiple onChange={(e) => this.handleChange(e)}/>
+                <input type="file" className="form-control btn btn-primary" accept=".csv" multiple onChange={(e) => this.handleChange(e)}/>
             </div>
             <h2>List of elements in the data-store</h2>
             { contents }
@@ -41,7 +41,6 @@ export class FetchData extends React.Component<RouteComponentProps<{}>, FetchOrd
 
     handleChange(e: React.ChangeEvent<HTMLInputElement>) {
         e.preventDefault();
-        console.log("handleChange")
         let files : FileList = e.target.files !== null? e.target.files : new FileList();
         for (var i = 0; i < files.length; i++){
             if (files == null) return;
@@ -53,18 +52,19 @@ export class FetchData extends React.Component<RouteComponentProps<{}>, FetchOrd
                 fetch(this.endpoint, {
                     method: 'POST',
                     headers: {
-                        'Accept': 'application/json',
+                        'Accept': 'application/json',  
                         'Content-Type': 'application/json',
                     },
                     body: JSON.stringify({
                         filesContent: [content]
                     })
-                }).then(response => { console.log("post response " + response + " " + content); });
+                }).then(response => { });
+                if (i >= files.length - 1) {
+                    window.location.reload();
+                }
             }
             reader.readAsText(file);
         }
-        console.log("endfor");
-        //this.forceUpdate()
         
     }
 
