@@ -22,9 +22,10 @@ Project realized by ALAHASSA Genereux
 - Launch Service Fabric Explorer
 - Launch Mongo DB Server
 - Update Mongo DB connection string in Constants
-- Update the "endpoint" property in ClientApp.FetchData.tsx if you modified api endpoint in ServiceManifest.xml or if you publishing on 
-- Publish the project IreckonuWebApp
-- Go to http://localhost:8412
+- Update the "endpoint" property in ClientApp.FetchData.tsx if you modified api endpoint in ServiceManifest.xml or if you are publishing directly 
+on Azure 
+- Publish the project IreckonuWebApp (or Debug)
+- Go to http://localhost:8412 
 - Import new data and visualize them
 
 NB: 
@@ -60,10 +61,12 @@ The Constants class contains all static variables used in all the project.
 - On the page, the client can select csv files to import. After file selection, the client read the data from the csv files and send the content to the web api via 
 the POST method. The html  table on the page is automatically reloaded after all the data has been stored in the database
 
-## Things that must be improved ##
+## Things that can be improved ##
 - Exception Handling
 - API HTTP Status return code
 - Separation between react component for listing data and import data
+- API versioning 
+- Front-end
 
  
  
