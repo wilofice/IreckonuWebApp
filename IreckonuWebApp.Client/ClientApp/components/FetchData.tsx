@@ -12,15 +12,13 @@ interface FetchOrdersDataState {
 export class FetchData extends React.Component<RouteComponentProps<{}>, FetchOrdersDataState> {
 
     private filesContent: string[] = [];
-
+    private endpoint: string = "http://localhost:8892/api/v1/Orders";
     constructor() {
         super();
         this.state = { orders: [], loading: true};
         this.handleChange = this.handleChange.bind(this);
 
-        fetch('http://localhost:8892/api/Orders', {
-            mode: "no-cors"
-        }).then(response => response.json() as Promise<Order[]>)
+        fetch(this.endpoint).then(response => response.json() as Promise<Order[]>)
             .then(data => {
                 this.setState({ orders: data, loading: false});
             });
@@ -43,35 +41,47 @@ export class FetchData extends React.Component<RouteComponentProps<{}>, FetchOrd
 
     handleChange(e: React.ChangeEvent<HTMLInputElement>) {
         e.preventDefault();
-        let files = e.target.files;
-        if (files == null) return;
-        for (var i = 0; i < files.length; i++) {
-            let reader = new FileReader();
+        console.log("handleChange")
+        let files : FileList = e.target.files !== null? e.target.files : new FileList();
+        for (var i = 0; i < files.length; i++){
+            if (files == null) return;
+            const file = files[i];
+            const reader = new FileReader();
             reader.onloadend = () => {
-                this.filesContent.push(reader.result);
+                console.log(reader.result)
+                const content: string = reader.result; 
+                fetch(this.endpoint, {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        filesContent: content
+                    })
+                }).then(response => { console.log("post response " + response + " " + content); });
             }
-            reader.readAsText(files[i]);
-            while (reader.readyState != reader.DONE);
+            reader.readAsText(file);
         }
-        console.log(this.filesContent)
-
-        fetch('http://localhost:8892/api/Orders', {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                filesContent: this.filesContent
-            }),
-            mode: "no-cors"
-        })
+        console.log("endfor");
         //this.forceUpdate()
         
     }
 
     private static renderForecastsTable(orders: Order[]) {
         orders.map(order => console.log("hllhl " + order.ArtikelCode));
+        const rows = orders.map(function (order:Order) {
+            return <tr key={order.Id}>
+                <td>1{order.Key}</td>
+                <td>2{order.ArtikelCode}</td>
+                <td>3{order.ColorCode}</td>
+                <td>4{order.Desciption}</td>
+                <td>5{order.Price}</td>
+                <td>6{order.DiscountPrice}</td>
+                <td>7{order.Q1}</td>
+                <td>8{order.Size}</td>
+                <td>9{order.Color}</td>
+            </tr>});
         return <table className='table'>
             <thead>
                 <tr>
@@ -87,19 +97,7 @@ export class FetchData extends React.Component<RouteComponentProps<{}>, FetchOrd
                 </tr>
             </thead>
             <tbody>
-            {orders.map(order =>
-                <tr key={order.Id}>
-                    <td>{order.Key}</td>
-                    <td>{order.ArtikelCode}</td>
-                    <td>{order.ColorCode}</td>
-                    <td>{order.Desciption}</td>
-                    <td>{order.Price}</td>
-                    <td>{order.DiscountPrice}</td>
-                    <td>{order.Q1}</td>
-                    <td>{order.Size}</td>
-                    <td>{order.Color}</td>
-                </tr>
-            )}
+                {rows}
             </tbody>
         </table>;
     }
