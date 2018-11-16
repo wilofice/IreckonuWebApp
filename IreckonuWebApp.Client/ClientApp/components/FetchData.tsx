@@ -32,9 +32,9 @@ export class FetchData extends React.Component<RouteComponentProps<{}>, FetchOrd
         return <div>
             <h1>Orders</h1>
             <div>
-                <input type="file" accept=".csv" multiple onChange={(e) => this.handleChange(e)}/>
-            </div>;
-            <p>List of orders in the data-store</p>
+                <input type="file" value= "Import CSV files" className="form-control btn" accept=".csv" multiple onChange={(e) => this.handleChange(e)}/>
+            </div>
+            <h2>List of elements in the data-store</h2>
             { contents }
         </div>;
     }
@@ -69,10 +69,9 @@ export class FetchData extends React.Component<RouteComponentProps<{}>, FetchOrd
     }
 
     private static renderForecastsTable(orders: Order[]) {
-        orders.map(order => console.log("order " + JSON.stringify(order)));
-        const rows = orders.map(function (order: Order) {
-            console.log(order);
+        const rows = orders.map(function (order: Order, index : number) {
             return <tr key={order.id}>
+                <td>{index+1}</td>
                 <td>{order.key}</td>
                 <td>{order.artikelCode}</td>
                 <td>{order.colorCode}</td>
@@ -83,9 +82,10 @@ export class FetchData extends React.Component<RouteComponentProps<{}>, FetchOrd
                 <td>{order.size}</td>
                 <td>{order.color}</td>
             </tr>});
-        return <table className='table'>
+        return <table className='table table-bordered'>
             <thead>
                 <tr>
+                    <th>#</th>
                     <th>Key</th>
                     <th>ArtikelCode</th>
                     <th>ColorCode</th>
