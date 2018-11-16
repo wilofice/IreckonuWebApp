@@ -1,6 +1,6 @@
 # IreckonuWebApp 
 
-## Requirements:
+## Requirements: ##
 -C# 
 -WEB API 2
 -.NET CORE 2
@@ -11,7 +11,7 @@
 -Service Fabric Explorer
 -ReactJs
 
-## Instructions to Run solution
+## Instructions to Run solution ##
 -Open solution in Visual Studio (with Admin privileges)
 -Install/Update Nuget Package for solutions
 -Launch Service Fabric Cluster: set Cluster Mode (default: 1 local Node)
@@ -26,10 +26,10 @@ NB: Solution won't run properly localy
 -if CORS policies are activated in the browser as web client will be sending cross-origin request to web api
 -if NETWORK USER user doesn't have full privilege over csv files to be imported on disk and over solution folder as the process 
 will need access  
-## Design
+## Design ##
 -I create two stateless service: a Web API application for the backend and a Reactjs application for the frontend
 
-## Web API
+## Web API ##
 
 - I use Autofac as a dependency injection container. I register all services and controllers in Autofac in Startup.cs. Thanks to Autofac
 I don't violate the SOLID principle: Dependency inversion principle by applying the IoC pattern
