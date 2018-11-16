@@ -8,7 +8,6 @@ namespace IreckonuWebApp.Api.StorageServices
 {
     public interface IStorageClient
     {
-        IClientSessionHandle GetSession();
         IMongoDatabase GetDatabase(string dBNAME);
     }
 }

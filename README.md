@@ -24,7 +24,7 @@ Project realized by ALAHASSA Genereux
 - Update Mongo DB connection string in Constants
 - Update the "endpoint" property in ClientApp.FetchData.tsx if you modified api endpoint in ServiceManifest.xml or if you are publishing directly 
 on Azure 
-- Publish the project IreckonuWebApp (or Debug)
+- Publish (or Debug) the project IreckonuWebApp (IreckonuWebApp must be as start project)
 - Go to http://localhost:8412 
 - Import new data and visualize 
 
@@ -37,7 +37,7 @@ will need access
 ## Design ##
 - I create two microservices: a Web API application for the backend and a Reactjs application for the frontend
 
-### Web API (Back end)###
+### Web API (Back end) ###
 -The backend is an ASP.NET Core Stateless service 
 - My  web api has a unique controller OrdersController which has two methods:
     * GetAsync which retrive all data imported from the mongo db database
@@ -47,32 +47,31 @@ will need access
 - I use Autofac as a dependency injection container. I register all services and controllers in Autofac in Startup.cs. Thanks to Autofac
 I don't violate the SOLID principle: Dependency inversion principle by applying the IoC pattern
 - Base on the data in the csv file provided in the assignment I defined one logical model called "Order" which reprensent an order with all the necessary informations. Since I'm using a mongo database I added the necessary annotations to the model.
-- The StorageService folder contains services interfaces (IContentWriter, IMongoRepository and IStorageClient) which defines methods that allows to request the mongo database and write stored data in json files on disk
+- The StorageService folder contains services interfaces (IContentWriter, IMongoRepository and IStorageClient) which defines methods that allows to request the mongo database and write stored data in a json file on disk
 - In the Helper folder, I defined interfaces like IContentReader which parse the JSON data received by the api and return a list of orders
 The Constants class contains all static variables used in all the project. 
-- In AutofacModule.cs we add services in the Autofac container
+- In AutofacModule.cs we add services in the Autofac container. Notice that StorageClient has InstancePerLifetimeScope. It is a Singleton.
 - In Startup.ConfigureServices method, we configure services and build Autofac container.
 
 ### Json File ###
-- When deployed, the json file "orders.json" can be found in C:\SfDevCluster\Data\_App\_Node_0\IreckonuWebAppType_App36\IreckonuWebApp.ApiPkg.Code.1.0.0 . 
-- You can change the name and the emplacement of the file in the Constants class in the Web api project
- "orders.json" contained all the data store in the mongo db database. I saved one copy of this file in 
+- When the service fabric application is deployed, the json file "orders.json" can be found in C:\SfDevCluster\Data\_App\_Node_0\IreckonuWebAppType_App36\IreckonuWebApp.ApiPkg.Code.1.0.0 . 
+- The name and the emplacement of the file can be changed in the Constants class in the Web api project.
+ "orders.json" contained all the data store in the mongo db database. I saved one copy of this file in this repo.
 
-### Client (frontend)###
+### Client (frontend) ###
 
-- the frontend is a Reactjs application
-- the Client contain one main component FetchData which is loaded at the application startup
-- When loading, the FetchData component request the Web API to retrieve data from database
-- On the page, the client can select csv files to import. After file selection, the client read the data from the csv files and send the content to the web api via 
-the POST method. The html  table on the page is automatically reloaded after all the data has been stored in the database
+- the frontend is a Reactjs application.
+- the Client contain one main component FetchData which is loaded at the application startup.
+- When loading, the FetchData component request the Web API to retrieve data from database.
+- On the page, the client can select csv files to import. After file selection, the client read the data from the csv files and send the content to the web api via the POST method. The html  table on the page is automatically reloaded after all the data has been stored in the database.
 
 ## Things that can be improved ##
 - Exception Handling
 - API HTTP Status return code
-- Separation between react component for listing data and import data
+- Separation between react component for listing data and importing data
 - API versioning 
 - Front-end design
-- Writing unit and functional test
+- Writing unit and functional tests
 
  
  

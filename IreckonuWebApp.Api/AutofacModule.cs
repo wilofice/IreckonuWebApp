@@ -15,7 +15,7 @@ namespace IreckonuWebApp.Api
         protected override void Load(ContainerBuilder builder)
         {
             base.Load(builder);
-            builder.RegisterType<StorageClient>().As<IStorageClient>();
+            builder.RegisterType<StorageClient>().As<IStorageClient>().InstancePerLifetimeScope();
             builder.RegisterType<ContentReader>().As<IContentReader>();
             builder.RegisterType<ContentWriter>().As<IContentWriter>();
             builder.RegisterType<MongoRepository<Order>>().As<IMongoRepository<Order>>().WithParameter("collectionName", Constants.ORDERS_COLLECTION_NAME);
