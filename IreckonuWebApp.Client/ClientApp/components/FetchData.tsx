@@ -32,7 +32,7 @@ export class FetchData extends React.Component<RouteComponentProps<{}>, FetchOrd
         return <div>
             <h1>Orders</h1>
             <div>
-                <input type="file"  multiple onChange={(e) => this.handleChange(e)}/>
+                <input type="file" accept=".csv" multiple onChange={(e) => this.handleChange(e)}/>
             </div>;
             <p>List of orders in the data-store</p>
             { contents }
@@ -57,7 +57,7 @@ export class FetchData extends React.Component<RouteComponentProps<{}>, FetchOrd
                         'Content-Type': 'application/json',
                     },
                     body: JSON.stringify({
-                        filesContent: content
+                        filesContent: [content]
                     })
                 }).then(response => { console.log("post response " + response + " " + content); });
             }
@@ -69,18 +69,19 @@ export class FetchData extends React.Component<RouteComponentProps<{}>, FetchOrd
     }
 
     private static renderForecastsTable(orders: Order[]) {
-        orders.map(order => console.log("hllhl " + order.ArtikelCode));
-        const rows = orders.map(function (order:Order) {
-            return <tr key={order.Id}>
-                <td>1{order.Key}</td>
-                <td>2{order.ArtikelCode}</td>
-                <td>3{order.ColorCode}</td>
-                <td>4{order.Desciption}</td>
-                <td>5{order.Price}</td>
-                <td>6{order.DiscountPrice}</td>
-                <td>7{order.Q1}</td>
-                <td>8{order.Size}</td>
-                <td>9{order.Color}</td>
+        orders.map(order => console.log("order " + JSON.stringify(order)));
+        const rows = orders.map(function (order: Order) {
+            console.log(order);
+            return <tr key={order.id}>
+                <td>{order.key}</td>
+                <td>{order.artikelCode}</td>
+                <td>{order.colorCode}</td>
+                <td>{order.desciption}</td>
+                <td>{order.price}</td>
+                <td>{order.discountPrice}</td>
+                <td>{order.q1}</td>
+                <td>{order.size}</td>
+                <td>{order.color}</td>
             </tr>});
         return <table className='table'>
             <thead>
@@ -103,17 +104,17 @@ export class FetchData extends React.Component<RouteComponentProps<{}>, FetchOrd
     }
 }
 
-interface Order {
-    Id: string;
-    Key: string;
-    ArtikelCode: string;
-    ColorCode: string;
-    Desciption: string;
-    Price:number;
-    DiscountPrice:number;
-    DeliveredIn: string;
-    Q1: string;
-    Size: string;
-    Color: string;
-    Timestamp:string;
+export interface Order {
+    id: string;
+    key: string;
+    artikelCode: string;
+    colorCode: string;
+    desciption: string;
+    price:number;
+    discountPrice:number;
+    deliveredIn: string;
+    q1: string;
+    size: string;
+    color: string;
+    timestamp:string;
 }
