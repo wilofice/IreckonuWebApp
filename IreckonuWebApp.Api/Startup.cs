@@ -28,7 +28,8 @@ namespace IreckonuWebApp.Api
         {
             
             services.AddMvc().AddControllersAsServices();
-            //services.AddApiVersioning();
+            services.AddCors();
+            services.AddApiVersioning();
             var builder = new ContainerBuilder();
 
             // When you do service population, it will include your controller
@@ -48,6 +49,7 @@ namespace IreckonuWebApp.Api
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
             app.UseMvc();
         }

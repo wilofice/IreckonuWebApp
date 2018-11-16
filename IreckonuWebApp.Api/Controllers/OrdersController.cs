@@ -11,8 +11,9 @@ using Newtonsoft.Json.Linq;
 
 namespace IreckonuWebApp.Api.Controllers
 {
+    [ApiVersion("1")]
     [Produces("application/json")]
-    [Route("api/Orders")]
+    [Route("api/v{version:apiVersion}/Orders")]
     public class OrdersController : Controller
     {
         private readonly IMongoRepository<Order> mongoRepository;
@@ -35,10 +36,11 @@ namespace IreckonuWebApp.Api.Controllers
 
         // POST api/Orders
         [HttpPost]
-        public async Task PostAsync([FromBody]JObject json)
+        public async Task<IActionResult> PostAsync([FromBody]JObject json)
         {
             var orders = contentReader.ReadContent(json);
             await mongoRepository.InsertMany(orders);
+            return StatusCode(200);
         }
 
     }
