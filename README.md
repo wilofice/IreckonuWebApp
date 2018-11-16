@@ -29,9 +29,9 @@ will need access
 ## Design
 -I create two stateless service: a Web API application for the backend and a Reactjs application for the frontend
 
-### Web API
+## Web API
 
--I use Autofac as a dependency injection container. I register all services and controllers in Autofac in Startup.cs. Thanks to Autofac
+- I use Autofac as a dependency injection container. I register all services and controllers in Autofac in Startup.cs. Thanks to Autofac
 I don't violate the SOLID principle: Dependency inversion principle by applying the IoC pattern
 -Base on the data in the csv file provided in the assignment I defined one logical model called Order which reprensent an order with all the necessary informations. Since I'm using a mongo database I added the necessary annotations to the model.  
 -My  web api has a unique controller OrdersController which has two methods:
