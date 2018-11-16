@@ -11,11 +11,13 @@ namespace IreckonuWebApp.Api.StorageServices
     public class MongoRepository<T> : IMongoRepository<T>
     {
         private readonly IStorageClient storageClient;
+        private readonly IContentWriter contentWriter;
         private readonly string collectionName;
-        public MongoRepository(IStorageClient storageClient, string collectionName)
+        public MongoRepository(IStorageClient storageClient, IContentWriter contentWriter, string collectionName)
         {
             this.storageClient = storageClient;
             this.collectionName = collectionName;
+            this.contentWriter = contentWriter;
         }
 
         public async Task<IEnumerable<T>> GetAllAsync()
@@ -29,6 +31,7 @@ namespace IreckonuWebApp.Api.StorageServices
         {
             var collection = storageClient.GetDatabase(Constants.DBNAME).GetCollection<T>(collectionName);
             await collection.InsertManyAsync(t);
+            await contentWriter.WriteContentToJsonFileAsync(collection, Constants.JSON_FILE_NAME);
         }
 
 
